@@ -6,6 +6,9 @@ const app = express();
 
 
 app.post('/helius', async(req, res) => {
+
+    console.log(req.body);
+    
     const fromAddress = req.body.fromAddress;
     const toAddress = req.body.toAddress;
     const amount = req.body.amount;
@@ -15,8 +18,8 @@ app.post('/helius', async(req, res) => {
         await mintTokens(fromAddress, toAddress, amount);
     } else {
         // What could go wrong here?
-        await burnTokens(fromAddress, toAddress, amount);
-        await sendNativeTokens(fromAddress, toAddress, amount);
+        await burnTokens(fromAddress, amount);
+        await sendNativeTokens(fromAddress, amount);
     }
 
     res.send('Transaction successful');
